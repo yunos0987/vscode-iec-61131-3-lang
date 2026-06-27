@@ -1,0 +1,52 @@
+{
+    "name": "iec-61131-3",
+    "displayName": "IEC 61131-3",
+    "description": "IEC 61131-3 language support for Visual Studio Code",
+    "version": "0.1.0",
+    "publisher": "graviness",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "keywords": [
+        "iec 61131-3",
+        "iec61131",
+        "structured text",
+        "st language",
+        "plc"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yunos0987/vscode-iec-61131-3-lang.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yunos0987/vscode-iec-61131-3-lang/issues"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "iec-61131-3",
+                "aliases": [
+                    "IEC 61131-3",
+                    "iecst"
+                ],
+                "extensions": [
+                    ".iec",
+                    ".st",
+                    ".iecst"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "iec-61131-3",
+                "scopeName": "source.iec-61131-3",
+                "path": "./syntaxes/iec-61131-3.tmLanguage.json"
+            }
+        ]
+    }
+}

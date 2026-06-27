@@ -1,0 +1,195 @@
+{
+  "name": "iec-61131-3",
+  "displayName": "IEC 61131-3",
+  "aliases": ["iecst"],
+  "scopeName": "source.iec-61131-3",
+  "fileTypes": ["iec", "st", "iecst"],
+  "patterns": [
+    { "include": "#comment-line" },
+    { "include": "#comment-block-paren" },
+    { "include": "#comment-block-slash" },
+    { "include": "#pragma" },
+    { "include": "#string-single" },
+    { "include": "#string-double" },
+    { "include": "#typed-duration" },
+    { "include": "#typed-datetime" },
+    { "include": "#boolean-null" },
+    { "include": "#numeric-literal" },
+    { "include": "#path-expression" },
+    { "include": "#keyword-control" },
+    { "include": "#variable-language" },
+    { "include": "#keyword-object" },
+    { "include": "#storage-modifier" },
+    { "include": "#storage-type" },
+    { "include": "#keyword-operator" },
+    { "include": "#operator-symbol" }
+  ],
+  "repository": {
+    "comment-line": {
+      "name": "comment.line.double-slash.iec-61131-3",
+      "begin": "//",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.comment.iec-61131-3" }
+      },
+      "end": "$"
+    },
+    "comment-block-paren": {
+      "name": "comment.block.iec-61131-3",
+      "begin": "\\(\\*",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.comment.begin.iec-61131-3" }
+      },
+      "end": "\\*\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.comment.end.iec-61131-3" }
+      }
+    },
+    "comment-block-slash": {
+      "name": "comment.block.iec-61131-3",
+      "begin": "/\\*",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.comment.begin.iec-61131-3" }
+      },
+      "end": "\\*/",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.comment.end.iec-61131-3" }
+      }
+    },
+    "pragma": {
+      "name": "meta.pragma.iec-61131-3",
+      "begin": "\\{",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.pragma.begin.iec-61131-3" }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.pragma.end.iec-61131-3" }
+      },
+      "contentName": "string.unquoted.pragma.iec-61131-3",
+      "patterns": [
+        {
+          "name": "constant.character.escape.iec-61131-3",
+          "match": "\\$[{}$]"
+        }
+      ]
+    },
+    "string-single": {
+      "name": "string.quoted.single.iec-61131-3",
+      "begin": "'",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.iec-61131-3" }
+      },
+      "end": "'",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.iec-61131-3" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.iec-61131-3",
+          "match": "\\$(?:[lLnNpPrRtT\"'$]|[0-9A-Fa-f]{2})"
+        }
+      ]
+    },
+    "string-double": {
+      "name": "string.quoted.double.iec-61131-3",
+      "begin": "\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.iec-61131-3" }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.iec-61131-3" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.iec-61131-3",
+          "match": "\\$(?:[lLnNpPrRtT\"'$]|[0-9A-Fa-f]{4})"
+        }
+      ]
+    },
+    "typed-duration": {
+      "comment": "Duration typed literals: T#1h30m, TIME#500ms, LT#1h, LTIME#1h30m500ms",
+      "name": "constant.other.duration.iec-61131-3",
+      "match": "\\b(?i:(?:ltime|time|lt|t)#[+-]?(?:[0-9](?:_?[0-9])*(?:\\.[0-9](?:_?[0-9])*)?(?:d|h|ms|us|ns|m(?!s)|s))+)\\b"
+    },
+    "typed-datetime": {
+      "comment": "Date/time typed literals: D#2024-01-01, DT#2024-01-01-12:00:00, TOD#12:00:00",
+      "name": "constant.other.date.iec-61131-3",
+      "match": "\\b(?i:ldate_and_time|date_and_time|ltime_of_day|time_of_day|ldate|ldt|ltod|date|tod|dt)#[0-9]+-[0-9]+-[0-9]+(?:-[0-9]+:[0-9]+:[0-9]+)?\\b"
+    },
+    "boolean-null": {
+      "name": "constant.language.iec-61131-3",
+      "match": "\\b(?i:true|false|null)\\b"
+    },
+    "numeric-literal": {
+      "patterns": [
+        {
+          "comment": "Hexadecimal: 16#CAFE_BABE",
+          "name": "constant.numeric.hex.iec-61131-3",
+          "match": "\\b(?:16#[0-9A-Fa-f](?:_?[0-9A-Fa-f])*)\\b"
+        },
+        {
+          "comment": "Binary: 2#1101_1010",
+          "name": "constant.numeric.binary.iec-61131-3",
+          "match": "\\b2#[01](?:_?[01])*\\b"
+        },
+        {
+          "comment": "Octal: 8#177",
+          "name": "constant.numeric.octal.iec-61131-3",
+          "match": "\\b8#[0-7](?:_?[0-7])*\\b"
+        },
+        {
+          "comment": "Float/real with decimal point: 3.14, 1.0e-6, 1e3",
+          "name": "constant.numeric.float.iec-61131-3",
+          "match": "\\b[0-9](?:_?[0-9])*(?:\\.[0-9](?:_?[0-9])*)?(?:[eE][+-]?[0-9](?:_?[0-9])*)?\\b"
+        },
+        {
+          "comment": "Integer: 123, 1_234_567",
+          "name": "constant.numeric.integer.iec-61131-3",
+          "match": "\\b[0-9](?:_?[0-9])*\\b"
+        }
+      ]
+    },
+    "path-expression": {
+      "comment": "Direct address: %IX2.1, %QW0, %MD1.2, %Q*, %*",
+      "name": "variable.language.path.iec-61131-3",
+      "match": "\\b(?:%[IQMiqm][XBWDLxbwdl]?[0-9]+(\\.[0-9]+)*|%[IQMiqm][XBWDLxbwdl]?\\*|%\\*|%[XBWDLxbwdl][0-9]+(\\.[0-9]+)?)\\b"
+    },
+    "keyword-control": {
+      "name": "keyword.control.iec-61131-3",
+      "match": "\\b(?i:by|case|continue|do|else|elsif|end_case|end_for|end_if|end_repeat|end_while|exit|for|if|of|repeat|return|then|to|until|while)\\b"
+    },
+    "variable-language": {
+      "patterns": [
+        {
+          "name": "variable.language.this.iec-61131-3",
+          "match": "\\b(?i:this)\\b"
+        },
+        {
+          "name": "variable.language.anonymous.iec-61131-3",
+          "match": "\\b_\\b"
+        }
+      ]
+    },
+    "keyword-object": {
+      "name": "keyword.other.object.iec-61131-3",
+      "match": "\\b(?i:var|end_var|end|ref_to|array|action|class|configuration|end_action|end_class|end_configuration|end_function|end_function_block|end_interface|end_method|end_namespace|end_program|end_resource|end_step|end_struct|end_transition|end_type|extends|from|function|function_block|implements|initial_step|interface|method|namespace|on|program|resource|step|super|task|transition|type|using|with|var_access|var_config|var_external|var_global|var_input|var_in_out|var_output|var_temp)\\b"
+    },
+    "storage-modifier": {
+      "name": "storage.modifier.iec-61131-3",
+      "match": "\\b(?i:overlap|final|f_edge|r_edge|abstract|at|constant|internal|non_retain|override|private|protected|public|read_only|read_write|retain)\\b"
+    },
+    "storage-type": {
+      "name": "storage.type.iec-61131-3",
+      "match": "\\b(?i:bool|byte|char|date_and_time|date|dint|dt|dword|int|ldate_and_time|ldate|ldt|lint|lreal|ltime_of_day|ltime|ltod|lword|real|sint|string|time_of_day|time|tod|udint|uint|ulint|usint|wchar|word|wstring)\\b"
+    },
+    "keyword-operator": {
+      "name": "keyword.operator.word.iec-61131-3",
+      "match": "\\b(?i:and|mod|not|or|ref|xor)\\b"
+    },
+    "operator-symbol": {
+      "name": "keyword.operator.iec-61131-3",
+      "match": "=>|:=|\\?=|<>|<=|>=|<|>|=|[+\\-*/&#\\.\\^]|\\*\\*|\\.\\.|\\\\|\\\\\\\\"
+    }
+  }
+}

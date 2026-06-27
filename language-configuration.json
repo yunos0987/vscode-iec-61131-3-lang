@@ -1,0 +1,29 @@
+{
+    "comments": {
+        "lineComment": "//",
+        "blockComment": ["(*", "*)"]
+    },
+    "brackets": [
+        ["(", ")"],
+        ["[", "]"]
+    ],
+    "autoClosingPairs": [
+        { "open": "(", "close": ")" },
+        { "open": "[", "close": "]" },
+        { "open": "(*", "close": "*)" },
+        { "open": "/*", "close": "*/" },
+        { "open": "'", "close": "'", "notIn": ["string", "comment"] },
+        { "open": "\"", "close": "\"", "notIn": ["string", "comment"] }
+    ],
+    "surroundingPairs": [
+        ["(", ")"],
+        ["[", "]"],
+        ["'", "'"],
+        ["\"", "\""]
+    ],
+    "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+    "indentationRules": {
+        "increaseIndentPattern": "(?i)^\\s*(if|else|elsif|case|for|while|repeat|function_block|function|program|method|action|namespace|class|type|var|var_input|var_output|var_in_out|var_external|var_global|var_temp|var_access|var_config)\\b",
+        "decreaseIndentPattern": "(?i)^\\s*(end_if|end_case|end_for|end_while|end_repeat|end_function_block|end_function|end_program|end_method|end_action|end_namespace|end_class|end_type|end_var|elsif|else)\\b"
+    }
+}
