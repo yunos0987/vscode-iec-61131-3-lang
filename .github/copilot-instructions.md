@@ -12,6 +12,10 @@ and language configuration for IEC 61131-3 files.
 
 ## Rules
 
+### General
+
+- Line separators must be **LF** (Unix-style).
+
 ### Language
 
 All source code, JSON comments, and documentation must be written in **English**.
